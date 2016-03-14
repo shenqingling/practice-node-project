@@ -11,7 +11,7 @@
     "url": "git+https://github.com/sql370/practice-node-project.git"
   },
   "author": "sql370 <sql370@qq.com>",
-  "license": "ISC",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sql370/practice-node-project/issues"
   },
