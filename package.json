@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "npm run clean && babel src -d dist --watch",
     "compile": "npm run clean && babel src -d dist",
-    "clean": "rm -Rf dist"
+    "clean": "rm -Rf dist",
+    "dev": "export NODE_ENV=dev && export DEBUG='my:*' && node dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
   },
   "dependencies": {
     "body-parser": "^1.15.0",
+    "debug": "^2.2.0",
     "express": "^4.13.4",
     "mongoose": "^4.4.7",
     "multiparty": "^4.1.2",

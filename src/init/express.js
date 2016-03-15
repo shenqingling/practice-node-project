@@ -14,6 +14,9 @@ import multiparty from 'multiparty'
 
 module.exports = function (done) {
 
+  const debug = $.createDubug('init:express');
+  debug('connection to Express...');
+
   const app = express();
 
   app.use(bodyParser.json());

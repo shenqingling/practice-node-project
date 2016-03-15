@@ -10,6 +10,9 @@ import mongoose from 'mongoose';
 
 module.exports = function (done) {
 
+  const debug = $.createDubug('init:mongodb');
+  debug('connection to MongooDB...');
+
   const conn = mongoose.createConnection($.config.get('db.mongodb'));
   $.mongodb = conn;
   $.model = {};

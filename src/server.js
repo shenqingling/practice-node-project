@@ -8,14 +8,24 @@
 
 import path from 'path';
 import projectCore from 'project-core';
+import createDubug from 'debug';
 
 const $ = global.$ = new projectCore();
+
+
+// 创建Debug文件
+$.createDubug = function (name) {
+  return createDubug('my:' + name);
+}
+const debug = $.createDubug('server');
+
 
 // 加载配置文件
 $.init.add((done) => {
   $.config.load(path.resolve(__dirname, 'config.js'));
   const env = process.env.NODE_ENV || null;
   if(env) {
+    debug('load env: %s', env);
     $.config.load(path.resolve(__dirname, '../config', env + '.js'));
   }
   $.env = env;
