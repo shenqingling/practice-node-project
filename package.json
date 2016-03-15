@@ -24,5 +24,8 @@
     "babel-preset-es2015-node4": "^2.0.3",
     "babel-preset-stage-0": "^6.5.0",
     "project-core": "0.0.16"
+  },
+  "dependencies": {
+    "mongoose": "^4.4.7"
   }
 }

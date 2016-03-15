@@ -22,6 +22,11 @@ $.init.add((done) => {
   done();
 });
 
+// 初始化MongooDB
+$.init.load(path.resolve(__dirname, 'init', 'mongodb.js'));
+// 加载models
+$.init.load(path.resolve(__dirname, 'models'));
+
 // 初始化
 $.init((err) => {
   if(err) {
@@ -31,4 +36,13 @@ $.init((err) => {
     // console.log('inited');
     console.log('inited [env=%s]', $.env);
   }
+
+  // 测试连接MongooDB
+  // const item = new $.model.User({
+  //   name: `User${$.utils.date('Ymd')}`,
+  //   password: '123456',
+  //   nickname: '测试用户'
+  // });
+  // item.save(console.log);
+
 });
