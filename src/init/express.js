@@ -15,7 +15,7 @@ import multiparty from 'multiparty'
 module.exports = function (done) {
 
   const debug = $.createDubug('init:express');
-  debug('connection to Express...');
+  debug('initing Express...');
 
   const app = express();
 

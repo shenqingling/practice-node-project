@@ -13,7 +13,7 @@ import createDubug from 'debug';
 const $ = global.$ = new projectCore();
 
 
-// 创建Debug文件
+// 创建Debug函数
 $.createDubug = function (name) {
   return createDubug('my:' + name);
 }
