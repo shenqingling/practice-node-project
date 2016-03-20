@@ -55,7 +55,8 @@ $.init((err) => {
 
   // 测试连接MongooDB
   // const item = new $.model.User({
-  //   name: `User${$.utils.date('Ymd')}`,
+  //   // name: `User${$.utils.date('Ymd')}`,
+  //   name: `User${$.utils.date('YmdHis')}`,
   //   password: '123456',
   //   nickname: '测试用户'
   // });

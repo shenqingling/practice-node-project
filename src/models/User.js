@@ -19,7 +19,7 @@ module.exports = function (done) {
   });
 
   $.mongodb.model('User', User);
-  $.mongodb.User = $.mongodb.model('User');
+  $.model.User = $.mongodb.model('User');
 
   done();
 
