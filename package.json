@@ -33,6 +33,7 @@
     "express": "^4.13.4",
     "mongoose": "^4.4.7",
     "multiparty": "^4.1.2",
-    "serve-static": "^1.10.2"
+    "serve-static": "^1.10.2",
+    "validator": "^5.1.0"
   }
 }

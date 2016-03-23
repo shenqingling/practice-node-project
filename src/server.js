@@ -37,6 +37,9 @@ $.init.load(path.resolve(__dirname, 'init', 'mongodb.js'));
 // 加载models
 $.init.load(path.resolve(__dirname, 'models'));
 
+//加载methods(功能模块)
+$.init.load(path.resolve(__dirname, 'methods'));
+
 
 // 初始化Express
 $.init.load(path.resolve(__dirname, 'init', 'express.js'));
@@ -51,6 +54,8 @@ $.init((err) => {
   }else{
     // console.log('inited');
     console.log('inited [env=%s]', $.env);
+
+    require('./test');
   }
 
   // 测试连接MongooDB
