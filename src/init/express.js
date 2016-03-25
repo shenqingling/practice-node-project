@@ -10,7 +10,7 @@ import path from 'path';
 import express from 'express';
 import serveStatic from 'serve-static';
 import bodyParser from 'body-parser';
-import multipart from 'connect-multiparty'；
+import multipart from 'connect-multiparty';
 import session from 'express-session';
 
 module.exports = function (done) {
@@ -51,7 +51,7 @@ module.exports = function (done) {
   // api返回错误json,而不是错误信息
   app.use('/api', function(err, req, res, next){
     debug('API error: %s', err && err.stack || err);
-    res.json(error: err.toString());
+    res.json({error: err.toString()});
   });
 
   app.listen($.config.get('web.port'), (err) => {
