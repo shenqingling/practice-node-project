@@ -24,9 +24,24 @@ const debug = $.createDubug('server');
 $.init.add((done) => {
   $.config.load(path.resolve(__dirname, 'config.js'));
   const env = process.env.NODE_ENV || null;
+
   if(env) {
-    debug('load env: %s', env);
-    $.config.load(path.resolve(__dirname, '../config', env + '.js'));
+    try{
+      debug('load env: %s', env);
+      $.config.load(path.resolve(__dirname, '../config', env + '.js'));
+    }catch(err){
+      // console.log(err);
+      // console.log(path.resolve(__dirname, '../config', env + '.js'));
+      const p = path.resolve(__dirname, '../config', env + '.js');
+      const e = require(p);
+      // console.log(e);
+      if(typeof(e) != 'function'){
+        console.error(`module "${p}" must export as a function`);
+      }else{
+        console.error(`There's an error in "${p}" : ${err}`);
+      }
+    }
+
   }
   $.env = env;
   done();
