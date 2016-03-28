@@ -14,9 +14,9 @@
 //   about: '好厉害呀'
 // },console.log);
 
-$.method('user.get').call({
-  name: 'hello'
-},console.log);
+// $.method('user.get').call({
+//   name: 'hello'
+// },console.log);
 
 // $.method('user.update').call({
 //   name: 'hello',
