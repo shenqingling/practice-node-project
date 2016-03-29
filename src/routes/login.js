@@ -31,7 +31,7 @@ module.exports = function (done) {
       //随机生成token
       req.session.logout_token = $.utils.randomString(20);
 
-      res.json({success: true, token:req.session.logout_token});
+      res.apiSuccess({token:req.session.logout_token});
     // } catch (err){
     //   next(err);
     // }
@@ -51,7 +51,7 @@ module.exports = function (done) {
     delete req.session.user;
     delete req.session.logout_token;
 
-    res.json({success: true});
+    res.apiSuccess({});
 
   })
 
@@ -60,7 +60,7 @@ module.exports = function (done) {
 
     const user = await $.method('user.add').call(req.body);
 
-    res.json({user: user});
+    res.apiSuccess({user: user});
 
   })
 
