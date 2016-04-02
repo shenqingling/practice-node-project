@@ -10,7 +10,9 @@ import _ from 'underscore';
 
 module.exports = function (done) {
 
+
   // 用了中间件捕捉错误信息有异常，改进server.js中的routerWrap
+  // 增加topic记录
   $.router.post('/api/topic/add',$.checkLogin, async function (req, res, next) {
 
     req.body.authorId = req.session.user._id;
@@ -31,6 +33,8 @@ module.exports = function (done) {
 
   });
 
+
+  // 获取topic的list
   $.router.get('/api/topic/list', async function (req, res, next) {
 
     if('tags' in req.query){
@@ -43,6 +47,7 @@ module.exports = function (done) {
 
   });
 
+  // 获取某具体的topic
   $.router.get('/api/topic/item/:topic_id', async function (req, res, next) {
 
     const topic = await $.method('topic.get').call({_id: req.params.topic_id});
@@ -52,6 +57,7 @@ module.exports = function (done) {
 
   });
 
+  // 修改某具体的topic
   $.router.post('/api/topic/item/:topic_id', $.checkLogin, $.checkTopicAuthor, async function (req, res, next) {
 
     if('tags' in req.body){
@@ -67,6 +73,7 @@ module.exports = function (done) {
 
   });
 
+  // 删除某具体的topic
   $.router.delete('/api/topic/item/:topic_id', $.checkLogin, $.checkTopicAuthor, async function (req, res, next) {
 
     const topic = await $.method('topic.delete').call({_id: req.params.topic_id});
@@ -75,6 +82,7 @@ module.exports = function (done) {
 
   });
 
+  // 增加topic的评论
   $.router.post('/api/topic/item/:topic_id/comment/add', $.checkLogin, async function (req, res, next) {
 
     req.body._id = req.params.topic_id;
@@ -86,22 +94,32 @@ module.exports = function (done) {
 
   });
 
-  $.router.post('/api/topic/item/:topic_id/comment/delete/', $.checkLogin, async function (req, res, next) {
+  // 获取topic的某条评论
+  $.router.post('/api/topic/item/:topic_id/comment/get', async function (req, res, next) {
+
+    req.body._id = req.params.topic_id;
+
+    const comments = await $.method('topic.comment.get').call({
+      _id: req.params.topic_id
+    });
+
+    var i = 0;
+
+    var comment = _.find(comments.comments, (com, index) => {
+      // 符合id的comment数据的index
+      i = index;
+      return com._id == req.body.cid;
+    });
+    console.log(comment);
+    res.apiSuccess({comment});
+
+  });
+
+  // 删除topic的某条评论
+  $.router.post('/api/topic/item/:topic_id/comment/delete', $.checkLogin, async function (req, res, next) {
 
     req.body._id = req.params.topic_id;
     req.body.authorId = req.session.user._id;
-
-    // const comment = await $.method('topic.comment.get').call({
-    //   _id: req.params.topic_id,
-    //   cid: req.body.cid
-    // });
-
-    // console.log(comment);
-    //
-    // _.find(comment.comments, (com) => {
-    //
-    // });
-
 
     const comment = await $.method('topic.comment.delete').call({
       _id: req.params.topic_id,

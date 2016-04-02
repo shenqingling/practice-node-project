@@ -8,6 +8,7 @@
     "watch": "npm run clean && babel src -d dist --watch",
     "compile": "npm run clean && babel src -d dist",
     "clean": "rm -Rf dist",
+    "dev": "export NODE_ENV=dev && export DEBUG='my:*' && node dist/server.js",
     "dev-unix": "export NODE_ENV=dev && export DEBUG='my:*,project-core:*' && node dist/server.js",
     "dev-wins": "set NODE_ENV=dev && set DEBUG='my:*' && node dist/server.js"
   },
@@ -36,6 +37,7 @@
     "mongoose": "^4.4.7",
     "project-core": "^0.1.1",
     "serve-static": "^1.10.2",
+    "underscore": "^1.8.3",
     "validator": "^5.1.0"
   }
 }

@@ -11,6 +11,7 @@ import validator from 'validator';
 module.exports = function (done) {
 
 
+  // 增加topic
   $.method('topic.add').check({
     authorId: {required: true, validate: (v) => validator.isMongoId(v)},
     title: {required: true},
@@ -26,6 +27,7 @@ module.exports = function (done) {
 
   });
 
+  // 获取某条具体的topic
   $.method('topic.get').check({
     _id: {required: true, validate: (v) => validator.isMongoId(v)}
   });
@@ -35,6 +37,7 @@ module.exports = function (done) {
 
   });
 
+  // 获取topic的list
   $.method('topic.list').check({
     authorId: {validate: (v) => validator.isMongoId(v)},
     tags: {validate: (v) => Array.isArray(v)},
@@ -62,6 +65,7 @@ module.exports = function (done) {
 
   });
 
+  // 删除topic
   $.method('topic.delete').check({
     _id: {required: true, validate: (v) => validator.isMongoId(v)}
   });
@@ -71,6 +75,7 @@ module.exports = function (done) {
 
   });
 
+  // 更新topic
   $.method('topic.update').check({
     _id: {required: true, validate: (v) => validator.isMongoId(v)},
     tags: {validate: (v) => Array.isArray(v)}
@@ -86,6 +91,7 @@ module.exports = function (done) {
 
   });
 
+  // 增加topic的评论
   $.method('topic.comment.add').check({
     _id: {required: true, validate: (v) => validator.isMongoId(v)},
     authorId: {required:true, validate: (v) => validator.isMongoId(v)},
@@ -107,20 +113,22 @@ module.exports = function (done) {
     });
   });
 
+  // 获取topic的某条评论
   $.method('topic.comment.get').check({
     _id: {required: true, validate: (v) => validator.isMongoId(v)},
-    cid: {required: true, validate: (v) => validator.isMongoId(v)}
+    // cid: {required: true, validate: (v) => validator.isMongoId(v)}
   });
   $.method('topic.comment.get').register(async function(params){
     return $.model.Topic.findOne({
       _id: params._id,
-      'comments._id': params.cid
+      // 'comments._id': params.cid
     },{
       'comments': 1
     });
 
   });
 
+  // 删除topic的某条评论
   $.method('topic.comment.delete').check({
     _id: {required: true, validate: (v) => validator.isMongoId(v)},
     cid: {required: true, validate: (v) => validator.isMongoId(v)}
