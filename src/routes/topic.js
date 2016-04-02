@@ -6,6 +6,8 @@
 * @author sql370 <sql370@qq.com>
 */
 
+import _ from 'underscore';
+
 module.exports = function (done) {
 
   // 用了中间件捕捉错误信息有异常，改进server.js中的routerWrap
@@ -70,6 +72,43 @@ module.exports = function (done) {
     const topic = await $.method('topic.delete').call({_id: req.params.topic_id});
 
     res.apiSuccess({topic});
+
+  });
+
+  $.router.post('/api/topic/item/:topic_id/comment/add', $.checkLogin, async function (req, res, next) {
+
+    req.body._id = req.params.topic_id;
+    // console.log(req.session.user._id);
+    req.body.authorId = req.session.user._id;
+    const comment = await $.method('topic.comment.add').call(req.body);
+
+    res.apiSuccess({comment});
+
+  });
+
+  $.router.post('/api/topic/item/:topic_id/comment/delete/', $.checkLogin, async function (req, res, next) {
+
+    req.body._id = req.params.topic_id;
+    req.body.authorId = req.session.user._id;
+
+    // const comment = await $.method('topic.comment.get').call({
+    //   _id: req.params.topic_id,
+    //   cid: req.body.cid
+    // });
+
+    // console.log(comment);
+    //
+    // _.find(comment.comments, (com) => {
+    //
+    // });
+
+
+    const comment = await $.method('topic.comment.delete').call({
+      _id: req.params.topic_id,
+      cid: req.body.cid
+    });
+
+    res.apiSuccess({comment});
 
   });
 
