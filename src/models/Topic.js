@@ -21,7 +21,6 @@ module.exports = function (done) {
     updatedAt: {type: Date, index: true},
     lastCommentAt: {type: Date, index: true},
     comments: [{
-      cid: ObjectId,
       authorId: ObjectId,
       content: String,
       createdAt: Date

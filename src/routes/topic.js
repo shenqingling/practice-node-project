@@ -99,18 +99,11 @@ module.exports = function (done) {
 
     req.body._id = req.params.topic_id;
 
-    const comments = await $.method('topic.comment.get').call({
-      _id: req.params.topic_id
+    const comment = await $.method('topic.comment.get').call({
+      _id: req.params.topic_id,
+      cid: req.body.cid
     });
 
-    var i = 0;
-
-    var comment = _.find(comments.comments, (com, index) => {
-      // 符合id的comment数据的index
-      i = index;
-      return com._id == req.body.cid;
-    });
-    console.log(comment);
     res.apiSuccess({comment});
 
   });
@@ -119,14 +112,21 @@ module.exports = function (done) {
   $.router.post('/api/topic/item/:topic_id/comment/delete', $.checkLogin, async function (req, res, next) {
 
     req.body._id = req.params.topic_id;
-    req.body.authorId = req.session.user._id;
 
-    const comment = await $.method('topic.comment.delete').call({
+    const query = {
       _id: req.params.topic_id,
       cid: req.body.cid
-    });
+    };
+    const comment = await $.method('topic.comment.get').call(query);
 
-    res.apiSuccess({comment});
+    if(!(comment && comment.comments && comment.comments[0] &&
+        comment.comments[0].authorId.toString() === req.session.user._id.toString())){
+      return next(new Error('access denied'));
+    }
+
+    await $.method('topic.comment.delete').call(query);
+
+    res.apiSuccess({comment: comment.comments[0]});
 
   });
 

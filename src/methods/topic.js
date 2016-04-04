@@ -13,7 +13,7 @@ module.exports = function (done) {
 
   // 增加topic
   $.method('topic.add').check({
-    authorId: {required: true, validate: (v) => validator.isMongoId(v)},
+    authorId: {required: true, validate: (v) => validator.isMongoId(String(v))},
     title: {required: true},
     content: {required: true},
     tags: {validate: (v) => Array.isArray(v)}
@@ -29,7 +29,7 @@ module.exports = function (done) {
 
   // 获取某条具体的topic
   $.method('topic.get').check({
-    _id: {required: true, validate: (v) => validator.isMongoId(v)}
+    _id: {required: true, validate: (v) => validator.isMongoId(String(v))}
   });
   $.method('topic.get').register(async function(params){
 
@@ -39,7 +39,7 @@ module.exports = function (done) {
 
   // 获取topic的list
   $.method('topic.list').check({
-    authorId: {validate: (v) => validator.isMongoId(v)},
+    authorId: {validate: (v) => validator.isMongoId(String(v))},
     tags: {validate: (v) => Array.isArray(v)},
     skip: {validate: (v) => v >= 0},
     limit: {validate: (v) => v > 0}
@@ -67,7 +67,7 @@ module.exports = function (done) {
 
   // 删除topic
   $.method('topic.delete').check({
-    _id: {required: true, validate: (v) => validator.isMongoId(v)}
+    _id: {required: true, validate: (v) => validator.isMongoId(String(v))}
   });
   $.method('topic.delete').register(async function(params){
 
@@ -77,7 +77,7 @@ module.exports = function (done) {
 
   // 更新topic
   $.method('topic.update').check({
-    _id: {required: true, validate: (v) => validator.isMongoId(v)},
+    _id: {required: true, validate: (v) => validator.isMongoId(String(v))},
     tags: {validate: (v) => Array.isArray(v)}
   });
   $.method('topic.update').register(async function(params){
@@ -93,14 +93,13 @@ module.exports = function (done) {
 
   // 增加topic的评论
   $.method('topic.comment.add').check({
-    _id: {required: true, validate: (v) => validator.isMongoId(v)},
-    authorId: {required:true, validate: (v) => validator.isMongoId(v)},
+    _id: {required: true, validate: (v) => validator.isMongoId(String(v))},
+    authorId: {required:true, validate: (v) => validator.isMongoId(String(v))},
     content: {required: true}
   });
   $.method('topic.comment.add').register(async function(params){
 
     const comment = {
-      // cid: new $.utils.ObjectId(),
       authorId: params.authorId,
       content: params.content,
       createdAt: new Date()
@@ -115,29 +114,31 @@ module.exports = function (done) {
 
   // 获取topic的某条评论
   $.method('topic.comment.get').check({
-    _id: {required: true, validate: (v) => validator.isMongoId(v)},
-    // cid: {required: true, validate: (v) => validator.isMongoId(v)}
+    _id: {required: true, validate: (v) => validator.isMongoId(String(v))},
+    cid: {required: true, validate: (v) => validator.isMongoId(String(v))}
   });
   $.method('topic.comment.get').register(async function(params){
     return $.model.Topic.findOne({
       _id: params._id,
-      // 'comments._id': params.cid
+      'comments._id': params.cid
     },{
-      'comments': 1
+      'comments.$': 1
     });
 
   });
 
   // 删除topic的某条评论
   $.method('topic.comment.delete').check({
-    _id: {required: true, validate: (v) => validator.isMongoId(v)},
-    cid: {required: true, validate: (v) => validator.isMongoId(v)}
+    _id: {required: true, validate: (v) => validator.isMongoId(String(v))},
+    cid: {required: true, validate: (v) => validator.isMongoId(String(v))}
   });
   $.method('topic.comment.delete').register(async function(params){
 
     return $.model.Topic.update({_id: params._id}, {
       $pull: {
-        'comments': {'_id': params.cid}
+        'comments': {
+          _id: params.cid
+        }
       }
     });
 
