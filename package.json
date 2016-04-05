@@ -8,9 +8,9 @@
     "watch": "npm run clean && babel src -d dist --watch",
     "compile": "npm run clean && babel src -d dist",
     "clean": "rm -Rf dist",
-    "dev": "export NODE_ENV=dev && export DEBUG='my:*' && node dist/server.js",
-    "dev-unix": "export NODE_ENV=dev && export DEBUG='my:*,project-core:*' && node dist/server.js",
-    "dev-wins": "set NODE_ENV=dev && set DEBUG='my:*' && node dist/server.js"
+    "dev": "export NODE_ENV=dev && export DEBUG='my:*' && nodemon dist/server.js",
+    "dev-unix": "export NODE_ENV=dev && export DEBUG='my:*,project-core:*' && nodemon dist/server.js",
+    "dev-wins": "set NODE_ENV=dev && set DEBUG='my:*' && nodemon dist/server.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +26,7 @@
     "babel-cli": "^6.6.5",
     "babel-preset-es2015-node4": "^2.0.3",
     "babel-preset-stage-0": "^6.5.0",
+    "nodemon": "^1.9.1",
     "project-core": "0.0.16"
   },
   "dependencies": {
@@ -37,7 +38,6 @@
     "mongoose": "^4.4.7",
     "project-core": "^0.1.1",
     "serve-static": "^1.10.2",
-    "underscore": "^1.8.3",
     "validator": "^5.1.0"
   }
 }

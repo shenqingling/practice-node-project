@@ -6,7 +6,6 @@
 * @author sql370 <sql370@qq.com>
 */
 
-import _ from 'underscore';
 
 module.exports = function (done) {
 
