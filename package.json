@@ -12,6 +12,7 @@
     "dev-unix": "export NODE_ENV=dev && export DEBUG='my:*,project-core:*' && nodemon dist/server.js",
     "dev-wins": "set NODE_ENV=dev && set DEBUG='my:*' && nodemon dist/server.js",
     "fe:compile": "cd frontend && webpack --progress --colors",
+    "fe:watch": "cd frontend && webpack --progress --colors --watch",
     "fe:dev": "cd frontend && webpack-dev-server"
   },
   "repository": {
