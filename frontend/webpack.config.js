@@ -1,7 +1,12 @@
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
-  entry: "./entry.js",
+  entry: [
+    'webpack-dev-server/client?http://0.0.0.0:3000', // WebpackDevServer host and port
+    'webpack/hot/only-dev-server', // "only" prevents reload on syntax errors
+    "./entry.js"
+  ],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: "bundle.js"
@@ -13,10 +18,7 @@ module.exports = {
     }, { //babel-loader
       test: /\.jsx?$/,
       exclude: /(node_modules|bower_components)/, //这两种文件不编译
-      loader: 'babel', // 'babel-loader' is also a legal name to reference
-      query: {
-        presets: ['react', 'es2015']
-      }
+      loaders: ['react-hot', 'babel'], // 'babel-loader' is also a legal name to reference
     }, { //bootstrap-webpack
       test: /\.(woff|woff2)$/,
       loader: "url-loader?limit=10000&mimetype=application/font-woff"
@@ -39,12 +41,18 @@ module.exports = {
     port: 3000,
     inline: true, //
     historyApiFallback: true,
-    status: {
+    stats: {
       colors: true
     },
-    // hot: true,
+    hot: true,
     // proxy: {
     //   '*': 'http://127.0,0.1:3001'
     // }
-  }
+  },
+  babel: {
+    presets: ['react', 'es2015']
+  },
+  plugins: [
+    new webpack.HotModuleReplacementPlugin()
+  ]
 };

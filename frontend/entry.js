@@ -1,17 +1,8 @@
 import 'bootstrap-webpack';
 import React from 'react';
-import ReactDom from 'react-dom';
+import ReactDOM from 'react-dom';
+import App from './App';
 
-console.log('hello, world');
+console.log('hello. world');
 
-class App extends React.Component {
-  render() {
-    return(
-      <div>
-        <h1>Hello World</h1>
-      </div>
-    );
-  }
-}
-
-ReactDom.render(<App />, document.body);
+ReactDOM.render(<App />, document.body);
