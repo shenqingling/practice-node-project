@@ -2,12 +2,12 @@ import browserRequest from 'browser-request';
 
 const urlBase = '/api/';
 
-export function request(method, path, data) {
+export function request(method, path, data = {}) {
   return new Promise((resolve, reject) => {
     method = method.toUpperCase();
     const options = {
       method,
-      uri: `${urlBase}/${path}`
+      url: `${urlBase}/${path}`,
     };
     if (method === 'GET' || method === 'HEAD') {
       options.qs = data;

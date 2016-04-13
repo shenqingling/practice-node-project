@@ -18,7 +18,7 @@ module.exports = {
     }, { //babel-loader
       test: /\.jsx?$/,
       exclude: /(node_modules|bower_components)/, //这两种文件不编译
-      loaders: ['react-hot', 'babel'], // 'babel-loader' is also a legal name to reference
+      loaders: ['react-hot', 'babel'] // 'babel-loader' is also a legal name to reference
     }, { //bootstrap-webpack
       test: /\.(woff|woff2)$/,
       loader: "url-loader?limit=10000&mimetype=application/font-woff"
