@@ -34,6 +34,12 @@ export function request(method, path, data = {}) {
   });
 }
 
+// 获取话题列表
 export function getTopicList(options) {
   return request('get', 'topic/list', {});
+}
+
+// 获取评论详情
+export function getTopicDetail(id) {
+  return request('get', `topic/item/${id}`).then(ret => ret.topic);
 }
