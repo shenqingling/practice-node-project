@@ -8,7 +8,7 @@
     "watch": "npm run clean && babel src -d dist --watch",
     "compile": "npm run clean && babel src -d dist",
     "clean": "rm -Rf dist",
-    "dev": "export NODE_ENV=dev && export DEBUG='my:*' && cd targrt && nodemon server.js",
+    "dev": "export NODE_ENV=dev && export DEBUG='my:*' && nodemon server.js",
     "dev-unix": "export NODE_ENV=dev && export DEBUG='my:*,project-core:*' && nodemon dist/server.js",
     "dev-wins": "set NODE_ENV=dev && set DEBUG='my:*' && nodemon dist/server.js",
     "fe:compile": "cd frontend && webpack --progress --colors",
