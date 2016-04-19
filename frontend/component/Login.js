@@ -1,6 +1,7 @@
 import React from 'react';
 import jQuery from 'jquery';
 import {login} from '../lib/client';
+import {redirectURL} from '../lib/utils';
 
 // const footerStyle = {
 //   marginTop: 50,
@@ -29,7 +30,7 @@ export default class Login extends React.Component{
         $btn.button('reset');
         // console.log(ret);
         alert('登录成功!');
-        location.replace('/');        
+        redirectURL('/');
       })
       .catch(err => {
         $btn.button('reset');
@@ -41,11 +42,11 @@ export default class Login extends React.Component{
     return(
       <div style={{width: 400, margin: 'auto'}}>
         <div className="panel panel-primary">
-        <div className="panel-heading">登录</div>
+          <div className="panel-heading">登录</div>
           <div className="panel-body">
             <form>
               <div className="form-group">
-                <label htmlFor="exampleInputEmail1">用户名</label>
+                <label htmlFor="ipt-name">用户名</label>
                 <input type="text" className="form-control" id="ipt-name" onChange={this.handleChange.bind(this, 'name')} placeholder="" />
               </div>
               <div className="form-group">

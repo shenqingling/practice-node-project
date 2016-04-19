@@ -9,6 +9,7 @@ import App from './App';
 
 import TopicDetail from './component/TopicDetail';
 import Login from './component/Login';
+import NewTopic from './component/NewTopic';
 
 
 // console.log('hello. world');
@@ -20,6 +21,7 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <Route path="/topic/:id" component={TopicDetail}/>
+      <Route path="new" component={NewTopic}/>
       <Route path="/login" component={Login}/>
     </Route>
   </Router>

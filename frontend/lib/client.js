@@ -59,3 +59,8 @@ export function loginUser() {
 export function logout() {
   return request('post', 'logout');
 }
+
+// 发表话题
+export function addTopic(title, content, tags) {
+  return request('post', 'topic/add', {title, content, tags}).then(ret => ret.topic);
+}
