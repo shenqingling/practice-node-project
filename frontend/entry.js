@@ -8,6 +8,7 @@ import ReactDOM from 'react-dom';
 import App from './App';
 
 import TopicDetail from './component/TopicDetail';
+import Login from './component/Login';
 
 
 // console.log('hello. world');
@@ -19,6 +20,7 @@ ReactDOM.render((
   <Router history={browserHistory}>
     <Route path="/" component={App}>
       <Route path="/topic/:id" component={TopicDetail}/>
+      <Route path="/login" component={Login}/>
     </Route>
   </Router>
 ), e);

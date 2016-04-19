@@ -10,7 +10,7 @@ module.exports = function (done) {
 
   // 当前用户的信息
   $.router.get('/api/login_user',async function (req, res, next) {
-    res.json({user: req.session.user, token: req.session.logout_token});
+    res.apiSuccess({user: req.session.user, token: req.session.logout_token});
   });
 
   // 登录
@@ -47,6 +47,16 @@ module.exports = function (done) {
       // console.log(req.session.logout_token);
       return next(new Error('invalid token'));
     }
+
+    delete req.session.user;
+    delete req.session.logout_token;
+
+    res.apiSuccess({});
+
+  })
+
+  // 登出
+  $.router.post('/api/logout',async function (req, res, next) {
 
     delete req.session.user;
     delete req.session.logout_token;
