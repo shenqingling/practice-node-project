@@ -4,7 +4,6 @@ import {getTopicDetail, loginUser, editTopic} from '../lib/client';
 import {renderMarkdown} from '../lib/utils';
 import $ from 'jquery';
 import {redirectURL} from '../lib/utils';
-import underscore from 'underscore';
 
 export default class TopicDetail extends React.Component{
 
@@ -54,10 +53,8 @@ export default class TopicDetail extends React.Component{
     if(auth.read == 'none'){
       $('#ipt-title').val(topic.title);
       $('#ipt-content').val(topic.content);
-      var ts = '';
-      underscore.each(topic.tags, (tag) => {
-        ts = ts ? `${ts},${tag}` : `${tag}`;
-      });
+      // 将tags数组转换成以,分割的字符串
+      var ts = topic.tags.toString();
       $('#ipt-tags').val(ts);
     }
     this.setState({auth});
