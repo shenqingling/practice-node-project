@@ -2,6 +2,7 @@ import React from 'react';
 import jQuery from 'jquery';
 import {addTopic} from '../lib/client';
 import {redirectURL} from '../lib/utils';
+import MarkdownEditor from './MarkdownEditor';
 
 export default class TopicEditor extends React.Component{
 
@@ -40,7 +41,7 @@ export default class TopicEditor extends React.Component{
             </div>
             <div className="form-group">
               <label htmlFor="ipt-content">内容</label>
-              <textarea type="text" className="form-control" rows="10" id="ipt-content" value={this.state.content} onChange={this.handleChange.bind(this, 'content')} placeholder=""></textarea>
+              <MarkdownEditor value={this.state.content} onChange={this.handleChange.bind(this, 'content')} />
             </div>
             <button type="button" className="btn btn-primary" onClick={this.handleSubmit.bind(this)}>保存</button>
           </form>
