@@ -12,6 +12,14 @@ marked.setOptions({
   }
 });
 
+// xss 默认将语法高亮去掉了，使用白名单解决
+const xssOptions = {
+  whiteList: Object.assign({}, xss.whiteList),
+};
+xss.whiteList.code = ['class'];
+xss.whiteList.span = ['class'];
+const myxss = new xss.FilterXSS(xssOptions);
+
 export function renderMarkdown(text) {
-  return xss(marked(text));
+  return myxss.process(marked(text));
 }
