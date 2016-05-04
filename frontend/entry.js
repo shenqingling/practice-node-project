@@ -9,6 +9,7 @@ import App from './App';
 
 import TopicDetail from './component/TopicDetail';
 import Login from './component/Login';
+import Signup from './component/Signup';
 import NewTopic from './component/NewTopic';
 import EditTopic from './component/EditTopic';
 
@@ -25,6 +26,7 @@ ReactDOM.render((
       <Route path="/topic/:id/edit" component={EditTopic}/>
       <Route path="new" component={NewTopic}/>
       <Route path="/login" component={Login}/>
+      <Route path="/signup" component={Signup}/>
     </Route>
   </Router>
 ), e);

@@ -79,3 +79,8 @@ export function addComment(id, content) {
 export function deleteComment(id, cid) {
   return request('post', `topic/item/${id}/comment/delete`, {cid});
 }
+
+// 用户注册
+export function signup(name, email, password, nickname) {
+  return request('post', 'signup', {name, email, password, nickname});
+}
