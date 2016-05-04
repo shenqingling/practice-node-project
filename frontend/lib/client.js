@@ -69,3 +69,13 @@ export function addTopic(title, content, tags) {
 export function updateTopic(id, title, content, tags) {
   return request('post', `topic/item/${id}`, {title, content, tags}).then(ret => ret.topic);
 }
+
+// 发表评论
+export function addComment(id, content) {
+  return request('post', `topic/item/${id}/comment/add`, {content}).then(ret => ret.comment);
+}
+
+// 删除评论
+export function deleteComment(id, cid) {
+  return request('post', `topic/item/${id}/comment/delete`, {cid});
+}
