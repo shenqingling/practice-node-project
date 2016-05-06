@@ -14,7 +14,7 @@ module.exports = function (done) {
   // 增加topic记录
   $.router.post('/api/topic/add',$.checkLogin, async function (req, res, next) {
 
-    req.body.authorId = req.session.user._id;
+    req.body.author = req.session.user._id;
 
     console.log(1, req.body);
     if('tags' in req.body){
@@ -95,7 +95,7 @@ module.exports = function (done) {
 
     req.body._id = req.params.topic_id;
     // console.log(req.session.user._id);
-    req.body.authorId = req.session.user._id;
+    req.body.author = req.session.user._id;
     const comment = await $.method('topic.comment.add').call(req.body);
 
     res.apiSuccess({comment});
@@ -128,7 +128,7 @@ module.exports = function (done) {
     const comment = await $.method('topic.comment.get').call(query);
 
     if(!(comment && comment.comments && comment.comments[0] &&
-        comment.comments[0].authorId.toString() === req.session.user._id.toString())){
+        comment.comments[0].author._id.toString() === req.session.user._id.toString())){
       return next(new Error('access denied'));
     }
 

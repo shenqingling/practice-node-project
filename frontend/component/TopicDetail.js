@@ -53,6 +53,7 @@ export default class TopicDetail extends React.Component{
     return(
       <div>
         <h2>{topic.title}</h2>
+        <p>{topic.author.nickname || '佚名'} 发表于 {topic.createdAt}</p>
         <Link to={`/topic/${topic._id}/edit`} className="btn btn-xs btn-primary"><i className="glyphicon glyphicon-edit"></i> 编辑</Link>
         <hr />
         <p>标签：
@@ -86,7 +87,7 @@ export default class TopicDetail extends React.Component{
                     <i className="glyphicon glyphicon-trash"></i>
                   </button>
                 </span>
-                {item.authorId}于{item.createdAt}说:
+                {item.author.nickname || '佚名'}于{item.createdAt}说:
                 <p dangerouslySetInnerHTML={{__html: item.html}}></p>
               </li>
             );

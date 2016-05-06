@@ -13,7 +13,7 @@ module.exports = function (done) {
   const ObjectId = Schema.ObjectId;
 
   const Topic = new Schema({
-    authorId: {type: ObjectId, index: true}, //index索引
+    author: {type: ObjectId, index: true, ref: 'User'}, //index索引   ref 表示关联到User表
     title: {type:String, trim: true}, //trim自动去掉首尾的空格
     content: {type: String},
     tags: [{type: String, index: true}],  //字符串数组
@@ -21,7 +21,7 @@ module.exports = function (done) {
     updatedAt: {type: Date, index: true},
     lastCommentAt: {type: Date, index: true},
     comments: [{
-      authorId: ObjectId,
+      author: {type: ObjectId, ref: 'User'},
       content: String,
       createdAt: Date
     }]
