@@ -84,3 +84,8 @@ export function deleteComment(id, cid) {
 export function signup(name, email, password, nickname) {
   return request('post', 'signup', {name, email, password, nickname});
 }
+
+// 修改用户信息
+export function updateProfile(nickname, email, about) {
+  return request('post', 'user/profile', {nickname, email, about});
+}

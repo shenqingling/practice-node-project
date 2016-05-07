@@ -12,6 +12,7 @@ import Login from './component/Login';
 import Signup from './component/Signup';
 import NewTopic from './component/NewTopic';
 import EditTopic from './component/EditTopic';
+import Profile from './component/Profile';
 
 
 // console.log('hello. world');
@@ -27,6 +28,7 @@ ReactDOM.render((
       <Route path="new" component={NewTopic}/>
       <Route path="/login" component={Login}/>
       <Route path="/signup" component={Signup}/>
+      <Route path="/profile" component={Profile}/>
     </Route>
   </Router>
 ), e);
