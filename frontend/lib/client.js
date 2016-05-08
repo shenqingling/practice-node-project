@@ -89,3 +89,8 @@ export function signup(name, email, password, nickname) {
 export function updateProfile(nickname, email, about) {
   return request('post', 'user/profile', {nickname, email, about});
 }
+
+// 删除主题
+export function deleteTopic(id) {
+  return request('delete', `topic/item/${id}`);
+}

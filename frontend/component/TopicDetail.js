@@ -1,9 +1,10 @@
 import React from 'react';
 import 'highlight.js/styles/github-gist.css';
-import {getTopicDetail, addComment, deleteComment} from '../lib/client';
+import {getTopicDetail, addComment, deleteComment, deleteTopic} from '../lib/client';
 import {renderMarkdown} from '../lib/utils';
 import { Router, Route, Link, browserHistory } from 'react-router';
 import CommentEditor from './CommentEditor';
+import {redirectURL} from '../lib/utils';
 
 export default class TopicDetail extends React.Component{
 
@@ -43,6 +44,17 @@ export default class TopicDetail extends React.Component{
       });
   }
 
+  handleDeleteTopic(){
+    if(!confirm('是否删除主题？')) return;
+    deleteTopic(this.state.topic._id)
+      .then(() => {
+        redirectURL('/');
+      })
+      .catch(err => {
+        alert(err);
+      });
+  }
+
   render(){
     const topic = this.state.topic;
     if(!topic){
@@ -54,7 +66,13 @@ export default class TopicDetail extends React.Component{
       <div>
         <h2>{topic.title}</h2>
         <p>{topic.author.nickname || '佚名'} 发表于 {topic.createdAt}</p>
-        <Link to={`/topic/${topic._id}/edit`} className="btn btn-xs btn-primary"><i className="glyphicon glyphicon-edit"></i> 编辑</Link>
+        <Link to={`/topic/${topic._id}/edit`} className="btn btn-xs btn-primary">
+          <i className="glyphicon glyphicon-edit"></i> 编辑
+        </Link>
+        &nbsp;&nbsp;
+        <button className="btn btn-xs btn-danger" onClick={this.handleDeleteTopic.bind(this)}>
+          <i className="glyphicon glyphicon-trash"></i> 删除
+        </button>
         <hr />
         <p>标签：
           {topic.tags.map((tag, i) => {
