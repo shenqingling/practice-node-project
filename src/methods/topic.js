@@ -64,7 +64,8 @@ module.exports = function (done) {
       tags: 1,
       createdAt: 1,
       updatedAt: 1,
-      lastCommentAt: 1
+      lastCommentAt: 1,
+      pageView: 1
     // }).populate('author', 'nickname');   // 第一个参数：通过author拿到User表中对应的数据   第二个参数表示只要拿到这个信息
     }).populate({
       path: 'author',
@@ -117,6 +118,16 @@ module.exports = function (done) {
     if(params.tags) update.tags = params.tags;
 
     return $.model.Topic.update({_id: params._id}, {$set: update});
+
+  });
+
+  // 访问统计增加
+  $.method('topic.incrPageView').check({
+    _id: {required: true, validate: (v) => validator.isMongoId(String(v))},
+  });
+  $.method('topic.incrPageView').register(async function(params){
+
+    return $.model.Topic.update({_id: params._id}, {$inc: {pageView: 1}});
 
   });
 
