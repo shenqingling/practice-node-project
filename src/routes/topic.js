@@ -30,6 +30,9 @@ module.exports = function (done) {
 
     const topic = await $.method('topic.add').call(req.body);
 
+    // 发布新主题就增加积分
+    $.method('user.incrScore').call({_id: req.body.author, score: 5});
+
     res.apiSuccess({topic});
 
   });
@@ -124,6 +127,9 @@ module.exports = function (done) {
     }
 
     const comment = await $.method('topic.comment.add').call(req.body);
+
+    // 发布新主题就增加积分
+    $.method('user.incrScore').call({_id: req.body.author, score: 1});
 
     res.apiSuccess({comment});
 
