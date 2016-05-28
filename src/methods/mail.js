@@ -57,7 +57,7 @@ module.exports = function (done) {
   });
 
   // $.method('mail.sendTemplate').call({
-  //   to: 'me@ucdok.com',
+  //   to: 'sql370@qq.com',
   //   subject: '欢迎',
   //   template: 'welcome',
   //   data: {
