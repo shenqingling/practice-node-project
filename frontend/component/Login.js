@@ -1,12 +1,8 @@
 import React from 'react';
 import jQuery from 'jquery';
+import {Link} from 'react-router';
 import {login} from '../lib/client';
 import {redirectURL} from '../lib/utils';
-
-// const footerStyle = {
-//   marginTop: 50,
-//   padding: 20
-// };
 
 export default class Login extends React.Component{
 
@@ -54,6 +50,9 @@ export default class Login extends React.Component{
                 <input type="password" className="form-control" id="password" onChange={this.handleChange.bind(this, 'password')} placeholder="" />
               </div>
               <button type="button" className="btn btn-primary" onClick={this.handleLogin.bind(this)}>登录</button>
+              <span className="pull-right">
+                <Link to="/reset_password">重置密码</Link>
+              </span>
             </form>
           </div>
         </div>

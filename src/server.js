@@ -30,11 +30,8 @@ $.init.add((done) => {
       debug('load env: %s', env);
       $.config.load(path.resolve(__dirname, '../config', env + '.js'));
     }catch(err){
-      // console.log(err);
-      // console.log(path.resolve(__dirname, '../config', env + '.js'));
       const p = path.resolve(__dirname, '../config', env + '.js');
       const e = require(p);
-      // console.log(e);
       if(typeof(e) != 'function'){
         console.error(`module "${p}" must export as a function`);
       }else{
@@ -65,6 +62,8 @@ $.init.load(path.resolve(__dirname, 'routes'));
 
 // 初始化limiter
 $.init.load(path.resolve(__dirname, 'init', 'limiter.js'));
+// 初始化captcha
+$.init.load(path.resolve(__dirname, 'init', 'captcha.js'));
 
 // 初始化
 $.init((err) => {
@@ -72,7 +71,6 @@ $.init((err) => {
     console.error(err);
     process.exit(-1);
   }else{
-    // console.log('inited');
     console.log('inited [env=%s]', $.env);
 
     require('./test');
