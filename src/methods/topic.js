@@ -168,7 +168,7 @@ module.exports = function (done) {
         topic: topic,
         content: params.content,
         user: fromUser
-      };
+      }
     }, err => {
       if (err) {
         console.error(err);
