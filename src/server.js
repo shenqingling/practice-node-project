@@ -29,9 +29,9 @@ $.init.add((done) => {
     // try{
       env.split(',').forEach(e => {
         debug('load env: %s', e);
-        $.config.load(path.resolve(__dirname, '../config', env + '.js'));
+        $.config.load(path.resolve(__dirname, '../config', e + '.js'));
       });
-      
+
     // }catch(err){
     //   const p = path.resolve(__dirname, '../config', env + '.js');
     //   const e = require(p);
@@ -75,8 +75,6 @@ $.init((err) => {
     process.exit(-1);
   }else{
     console.log('inited [env=%s]', $.env);
-
-    require('./test');
   }
 
   // 测试连接MongooDB
