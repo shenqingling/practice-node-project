@@ -23,6 +23,19 @@ $.init.add(async function() {
   }
 });
 
+// 清空mongo数据库
+$.init.add(done => {
+  $.mongodb.db.dropDatabase(done);
+});
+$.init.add(async function() {
+  const data = require('./test.db');
+  for(const name in data){
+    for(const item of data[name]){
+      await $.mongodb.db.collection(name).save(item);
+    }
+  }
+});
+
 // 初始化
 $.init((err) => {
   if(err) {
@@ -35,9 +48,7 @@ $.init((err) => {
 
 function makeRequest(method, path, params){
   return new Promise((resolve, reject) => {
-    $.ready(err => {
-      if(err) return reject(err);
-
+    $.ready(() => {
       params = params || {};
       let req = request($.express)[method](path);
       if(method === 'get' || method === 'head'){
