@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "npm run compile && npm run test:dev",
-    "test:dev": "set NODE_ENV=dev,test && set DEBUG='my:*' && mocha /test -t 5000",
+    "test:dev": "set NODE_ENV=dev,test&& set DEBUG='my:*' && mocha dist/test -t 5000",
     "watch": "npm run clean && babel src -d dist --watch",
     "compile": "npm run clean && babel src -d dist",
     "clean": "rm -Rf dist",
