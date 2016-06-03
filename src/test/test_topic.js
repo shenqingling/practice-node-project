@@ -11,11 +11,11 @@ import request from '../test';
 
 describe('topic', function(){
 
-  it('list', async function(){
-
-    const list = await request.get('/api/topic/list');
-    console.log(list);
-
-  });
+  // it('list', async function(){
+  //
+  //   const list = await request.get('/api/topic/list');
+  //   console.log(list);
+  //
+  // });
 
 });
