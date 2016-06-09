@@ -59,6 +59,7 @@ module.exports = function (done) {
 
   app.use(router);
   app.use('/static', serveStatic(path.resolve(__dirname, '../../static')));
+  app.use('/build', serveStatic(path.resolve(__dirname, '../../frontend/build')));
 
   // api返回错误json,而不是错误信息
   app.use('/api', function(err, req, res, next){

@@ -17,20 +17,20 @@ module.exports = function (set, get, has) {
   // session redis connection
   set('web.session.redis', {
     host: '192.168.99.100',
-    port: 32773,
+    port: 32770,
   });
 
   // limiter redis connection
   set('limiter.redis', {
     host: '192.168.99.100',
-    port: 32773,
+    port: 32770,
     prefix: 'L:'
   });
 
   // captcha redis connection
   set('captcha.redis', {
     host: '192.168.99.100',
-    port: 32773,
+    port: 32770,
     prefix: 'C:'
   });
 
